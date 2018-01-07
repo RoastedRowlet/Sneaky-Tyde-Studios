@@ -2,39 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
-    public float speed;
+    [SerializeField]
+    private float speed = 10f;
+
     private Rigidbody2D rb2d;
     private Animator anim;
 
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D> ();
+        rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        Movement();
 
-        if (moveHorizontal > 0)
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
         {
-            moveHorizontal = 1;
+            // Destroy(other.gameObject);  <-- Probably more what we're looking for.
+            other.gameObject.SetActive(false);
+
         }
-        else if(moveHorizontal < 0)
-        {
-            moveHorizontal = -1;
-        }
+    }
 
 
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+    //Handles player movement
+    private void Movement()
+    {
 
-
-        rb2d.AddForce(movement * speed);
-
-        if(Input.GetKeyDown("d"))
+        if (Input.GetKeyDown("d"))
         {
             anim.SetTrigger("Walk");
         }
@@ -42,17 +47,17 @@ public class PlayerController : MonoBehaviour {
         {
             anim.SetTrigger("Knight1_Idle");
         }
-       
 
-    }
-   
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-           // Destroy(other.gameObject);  <-- Probably more what we're looking for.
-            other.gameObject.SetActive(false);
 
-        }
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        //Move the player
+
+        Vector3 translationX = Vector3.right * speed * horizontalInput * Time.deltaTime;
+        Vector3 translationY = Vector3.up * speed * verticalInput * Time.deltaTime;
+
+        transform.Translate(translationX + translationY, Space.World);
     }
+    
 }
