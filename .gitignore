@@ -8,6 +8,10 @@
 [Oo]bj/
 [Tt]emp/
 [Uu]nityGenerated/
+<<<<<<< HEAD
+=======
+.vs
+>>>>>>> master
 /[Aa]ssets/AssetStoreTools*
 /[Bb]uild/
 /[Ll]ibrary/
@@ -15,6 +19,10 @@
 /[Oo]bj/
 /[Tt]emp/
 /[Uu]nityGenerated/
+<<<<<<< HEAD
+=======
+/.vs
+>>>>>>> master
 # file on crash reports
 sysinfo.txt
 # Unity3D generated meta files
@@ -45,4 +53,8 @@ sysinfo.txt
 .Trashes
 Icon?
 ehthumbs.db
+<<<<<<< HEAD
 Thumbs.db
+=======
+Thumbs.db
+>>>>>>> master
