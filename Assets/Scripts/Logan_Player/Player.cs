@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : Character
-{
+public class Player : Character {
 
 
 
     // Update is called once per frame
-    protected override void FixedUpdate()
+    protected override void FixedUpdate ()
     {
         //Executes the GetInput function
         GetInput();
 
         base.FixedUpdate();
-    }
+	}
 
     /// Listen's to the players input
     private void GetInput()
