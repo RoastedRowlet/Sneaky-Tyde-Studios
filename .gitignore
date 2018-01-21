@@ -8,6 +8,7 @@
 [Oo]bj/
 [Tt]emp/
 [Uu]nityGenerated/
+[Gg]ame_[Dd]ata/
 .vs
 /[Aa]ssets/AssetStoreTools*
 /[Bb]uild/
@@ -16,6 +17,7 @@
 /[Oo]bj/
 /[Tt]emp/
 /[Uu]nityGenerated/
+/[Gg]ame_[Dd]ata/
 /.vs
 # file on crash reports
 sysinfo.txt

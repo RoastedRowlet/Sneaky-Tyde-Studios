@@ -11,20 +11,46 @@ public class CameraController : MonoBehaviour {
     [SerializeField]
     private Vector3 offset;
 
+    [SerializeField]
+    Tilemap tilemap;
 
-	// Use this for initialization
-	void Start () {
+    private float tileOverHang = 0.10f;
+
+    // Use this for initialization
+    void Start () {
 
         offset = transform.position - player.transform.position;
+        tilemap.CompressBounds();
 
-	}
+    }
 	
 	// Update is called once per frame
 	void LateUpdate () {
 
-        transform.position = player.transform.position + offset;
+        Vector3 newPos = player.transform.position + offset;
 
         Camera cam = Camera.main;
-        float y = cam.orthographicSize;
+        Vector3 tmSize = tilemap.size;
+        float camHeight = cam.orthographicSize;
+        float camWidth = camHeight * cam.aspect;
+
+        if (newPos.x + camWidth > tmSize.x/2)
+        {
+            newPos.x = tmSize.x / 2 + camWidth;
+        }
+        else if (newPos.x - camWidth < -tmSize.x / 2)
+        {
+            newPos.x = -tmSize.x / 2 + camWidth;
+        }
+
+        if (newPos.y + camHeight > tmSize.y / 2)
+        {
+            newPos.y = tmSize.y / 2 - camHeight;
+        }
+        else if (newPos.y - camHeight < -tmSize.y / 2)
+        {
+            newPos.y = -tmSize.y / 2 + camHeight;
+        }
+        transform.position = newPos;
     }
 }
