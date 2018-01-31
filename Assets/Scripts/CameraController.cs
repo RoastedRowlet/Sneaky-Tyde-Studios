@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour {
 
         if (newPos.x + camWidth > tmSize.x/2)
         {
-            newPos.x = tmSize.x / 2 + camWidth;
+            newPos.x = tmSize.x / 2 - camWidth;
         }
         else if (newPos.x - camWidth < -tmSize.x / 2)
         {
