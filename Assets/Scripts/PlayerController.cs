@@ -2,26 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
 
-    [SerializeField]
-    private float speed = 10f;
-
-    private Rigidbody2D rb2d;
-    private Animator anim;
-
-    void Start()
+    protected override void FixedUpdate()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-    }
+        GetInput();
 
-    void FixedUpdate()
-    {
-        Movement();
-
-
+        base.FixedUpdate();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -34,30 +22,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    //Handles player movement
-    private void Movement()
+    private void GetInput()
     {
+        direction = Vector2.zero;
 
-        if (Input.GetKeyDown("d"))
+        if (Input.GetKey(KeyCode.W))
+        {
+            direction += Vector2.up;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            direction += Vector2.left;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            direction += Vector2.down;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+           direction += Vector2.right;
+        }
+
+
+      /*  if (Input.GetKeyDown("d"))
         {
             anim.SetTrigger("Walk");
         }
         else
         {
             anim.SetTrigger("Knight1_Idle");
-        }
-
-
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
-        //Move the player
-
-        Vector3 translationX = Vector3.right * speed * horizontalInput * Time.deltaTime;
-        Vector3 translationY = Vector3.up * speed * verticalInput * Time.deltaTime;
-
-        transform.Translate(translationX + translationY, Space.World);
+        } */
     }
     
 }
