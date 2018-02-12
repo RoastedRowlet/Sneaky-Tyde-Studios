@@ -36,5 +36,20 @@ public class Player : Character {
         {
             direction += Vector2.right;
         }
+        if (Input.GetKey(KeyCode.X))
+        {
+            Debug.Log("SpaceBar");
+            //StartCoroutine(Attack());
+        }
     }
+
+    private IEnumerator Attack()
+    {
+        myAnimator.SetBool("attack", true);
+
+        yield return new WaitForSeconds(3); //Hardcoded Casttime for debug
+
+        Debug.Log("donecasting");
+    }
+
 }
