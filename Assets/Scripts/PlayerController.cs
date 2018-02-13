@@ -4,11 +4,28 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
+    [SerializeField]
+    private Stats health;
 
+    [SerializeField]
+    private Stats mana;
+
+    [SerializeField]
+    private float initialHealth;
+
+    [SerializeField]
+    private float initialMana;
+
+    protected override void Start()
+    {
+        health.Initialize(initialHealth, initialHealth);
+        mana.Initialize(initialMana, initialMana);
+
+        base.Start();
+    }
     protected override void FixedUpdate()
     {
         GetInput();
-
         base.FixedUpdate();
     }
 
@@ -26,6 +43,21 @@ public class PlayerController : Character
     {
         direction = Vector2.zero;
 
+        ///DEBUG
+        ///
+        if(Input.GetKey(KeyCode.I))
+        {
+            health.MyCurrentValue -= 10;
+            mana.MyCurrentValue -= 10;
+        }
+        if(Input.GetKey(KeyCode.O))
+        {
+            health.MyCurrentValue += 10;
+            mana.MyCurrentValue += 10;
+        }
+        ///DEBUG
+        ///
+
         if (Input.GetKey(KeyCode.W))
         {
             direction += Vector2.up;
@@ -42,16 +74,6 @@ public class PlayerController : Character
         {
            direction += Vector2.right;
         }
-
-
-      /*  if (Input.GetKeyDown("d"))
-        {
-            anim.SetTrigger("Walk");
-        }
-        else
-        {
-            anim.SetTrigger("Knight1_Idle");
-        } */
     }
     
 }
