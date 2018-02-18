@@ -11,7 +11,13 @@ public abstract class Character : MonoBehaviour {
 
     protected Vector2 direction;
 
+    //holds all current relevant non-movement inputs 
+    protected List<KeyCode> inputs;
+
     private Rigidbody2D myRigidBody;
+
+    protected bool isAttacking;
+    
 
     public bool IsMoving
     {
@@ -27,6 +33,8 @@ public abstract class Character : MonoBehaviour {
     {
         myRigidBody = GetComponent <Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        inputs = new List<KeyCode>();
+
 	}
 
     // Update is called once per frame on the users display, will run at FPS 
@@ -58,6 +66,10 @@ public abstract class Character : MonoBehaviour {
 
             myAnimator.SetFloat("x", direction.x);
             myAnimator.SetFloat("y", direction.y);
+        }
+        else if (isAttacking)
+        {
+            ActivateLayer("Attack Layer");
         }
         else
         {

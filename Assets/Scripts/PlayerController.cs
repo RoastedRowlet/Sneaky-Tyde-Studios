@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ public class PlayerController : Character
     [SerializeField]
     private float initialMana;
 
+    [SerializeField]
+    private GameObject[] SpellPrefabs;
+
     protected override void Start()
     {
         health.Initialize(initialHealth, initialHealth);
@@ -26,8 +30,12 @@ public class PlayerController : Character
     protected override void FixedUpdate()
     {
         GetInput();
+
         base.FixedUpdate();
+        
     }
+
+    
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -74,6 +82,25 @@ public class PlayerController : Character
         {
            direction += Vector2.right;
         }
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            StartCoroutine(Attack(0));
+        }
+
     }
-    
+
+    private IEnumerator Attack(int spell)
+    {
+        //Add animation stuff
+        CastSpell(spell);
+        yield return new WaitForSeconds(0);
+    }
+
+    private void CastSpell(int spell)
+    {
+        Instantiate(SpellPrefabs[0], transform.position, Quaternion.identity);
+    }
+
+
 }
