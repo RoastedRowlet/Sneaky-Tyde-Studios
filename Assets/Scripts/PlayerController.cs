@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
+<<<<<<< HEAD
     [SerializeField]
     private Stats health;
 
     [SerializeField]
     private Stats mana;
+=======
+    private float speed = 10f;
+>>>>>>> CameraEdges
 
     [SerializeField]
     private float initialHealth;
